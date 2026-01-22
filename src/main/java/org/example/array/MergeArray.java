@@ -6,10 +6,33 @@ public class MergeArray {
 
     // LeetCode method signature (DO NOT CHANGE)
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-        // TODO:
-        // 1. Develop your merging logic here
-        // 2. Do NOT return anything
-        // 3. Modify nums1 in-place
+
+
+        int point2 = 0; // index trace of 2nd array
+
+        for (int i = 0; i < nums1.length; i++) {
+            if (point2 < n && nums2[point2] < nums1[i]  ){
+                swap(nums1, i, nums2[point2]);
+                point2++;
+                m++;
+            } else if (i >= m && point2 < n){
+                nums1[i] = nums2[point2];
+                point2++;
+            }
+
+
+        }
+    }
+    
+    private void swap(int[] nums1, int index, int newValue){
+
+        int valueToAdd = newValue;
+        for (int i = index; i < nums1.length; i++) {
+
+            int temp = nums1[i];
+            nums1[i] = valueToAdd;
+            valueToAdd = temp;
+        }
     }
 
     // -----------------------------
