@@ -14,7 +14,42 @@ public class RemoveDuplicatesSortedArrayII {
     public static int removeDuplicatesInitial(int[] nums) {
         // TODO: implement initial approach here
 
-        return 0; // placeholder
+
+        int similarCount = 0;
+        int uniquePlacement = 0;
+
+        if (nums.length < 2  ){
+            return nums.length;
+        }
+
+        int lastValue = 0;
+
+
+        for (int i = 0; i < nums.length; i++) {
+
+            if (i == 0){
+                lastValue = nums[i];
+                similarCount++;
+                continue;
+            }
+
+
+            if (nums[i] == lastValue && similarCount < 2){
+                uniquePlacement++;
+                nums[uniquePlacement] = lastValue;
+                similarCount++;
+            }
+
+            if (nums[i] !=  lastValue){
+                similarCount = 1;
+                lastValue = nums[i];
+                uniquePlacement++;
+                nums[uniquePlacement] = nums[i];
+
+            }
+        }
+
+        return uniquePlacement + 1; // placeholder
     }
 
     // =============================
@@ -34,6 +69,12 @@ public class RemoveDuplicatesSortedArrayII {
     // Test Harness (Local Run)
     // =============================
     public static void main(String[] args) {
+
+        int[] nums6 = {1};
+        runTest(nums6, 1, new int[]{1});
+
+        int[] nums5 = {1, 2};
+        runTest(nums5, 2, new int[]{1, 2});
 
         // -------- Test Case 1 --------
         int[] nums1 = {1, 1, 1, 2, 2, 3};
