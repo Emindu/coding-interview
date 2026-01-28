@@ -36,6 +36,17 @@ public class BestTimeToBuyAndSellStockII_122 {
     public static int maxProfitInitial(int[] prices) {
         // TODO: implement initial solution
 
+        int sumProfit = 0;
+        int currentBuyPoint = 0;
+
+        for (int i = 0; i < prices.length; i++) {
+
+            // update current buy Point
+
+
+
+        }
+
         return -1;
     }
 
