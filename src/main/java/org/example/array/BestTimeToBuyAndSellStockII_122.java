@@ -37,17 +37,35 @@ public class BestTimeToBuyAndSellStockII_122 {
         // TODO: implement initial solution
 
         int sumProfit = 0;
-        int currentBuyPoint = 0;
+        int currentBuyPoint = prices[0];
+        int maxSofar = 0;
+
 
         for (int i = 0; i < prices.length; i++) {
 
-            // update current buy Point
+            if (i == 0 ){
+                currentBuyPoint = prices[i];
+                continue;
+            }
+
+            if (prices[i] < prices[i - 1]){
+                sumProfit += prices[i - 1] - currentBuyPoint;
+                currentBuyPoint = prices[i];
+                maxSofar = prices[i];
+            } else {
+                if (currentBuyPoint > prices[i]){
+                    currentBuyPoint = prices[i];
+                }
+            }
+
+
+
 
 
 
         }
 
-        return -1;
+        return sumProfit;
     }
 
     // =========================
