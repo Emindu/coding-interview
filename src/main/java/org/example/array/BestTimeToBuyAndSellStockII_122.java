@@ -37,32 +37,31 @@ public class BestTimeToBuyAndSellStockII_122 {
         // TODO: implement initial solution
 
         int sumProfit = 0;
-        int currentBuyPoint = prices[0];
+        int currentBuyPoint = -1;
         int maxSofar = 0;
-
+        int lastValue = -1;
 
         for (int i = 0; i < prices.length; i++) {
 
-            if (i == 0 ){
+            if (lastValue == -1 ){
+                lastValue = prices[i];
                 currentBuyPoint = prices[i];
                 continue;
             }
 
-            if (prices[i] < prices[i - 1]){
-                sumProfit += prices[i - 1] - currentBuyPoint;
-                currentBuyPoint = prices[i];
-                maxSofar = prices[i];
-            } else {
-                if (currentBuyPoint > prices[i]){
-                    currentBuyPoint = prices[i];
+            if (lastValue > prices[i]){
+                if (currentBuyPoint != -1 ){
+                    sumProfit += lastValue - currentBuyPoint;
                 }
+                currentBuyPoint = prices[i];
+            }
+
+            if (i == prices.length  -1 && currentBuyPoint < prices[i] ){
+                sumProfit += prices[i] - currentBuyPoint;
             }
 
 
-
-
-
-
+            lastValue = prices[i];
         }
 
         return sumProfit;
@@ -73,7 +72,14 @@ public class BestTimeToBuyAndSellStockII_122 {
     // =========================
     public static int maxProfitOptimized(int[] prices) {
         // TODO: implement optimized solution
-        return -1;
+        int sum = 0;
+
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i - 1] < prices[i]){
+                sum += prices[i] - prices[i - 1];
+            }
+        }
+        return sum;
     }
 
     // =========================
@@ -88,6 +94,7 @@ public class BestTimeToBuyAndSellStockII_122 {
         List<TestCase> tests = new ArrayList<>();
 
         // Examples
+        tests.add(new TestCase(new int[]{1,9,6,9,1,7,1,1,5,9,9,9}, 25, "Example 1"));
         tests.add(new TestCase(new int[]{7, 1, 5, 3, 6, 4}, 7, "Example 1"));
         tests.add(new TestCase(new int[]{1, 2, 3, 4, 5}, 4, "Example 2"));
         tests.add(new TestCase(new int[]{7, 6, 4, 3, 1}, 0, "Example 3"));
