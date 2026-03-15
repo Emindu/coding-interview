@@ -11,15 +11,18 @@ public class MinimumSizeSubarraySum {
     public int minSubArrayLen(int target, int[] nums) {
         // TODO: Implement your sliding window logic here
         int length = nums.length;
-        int[] prefixArra = new int[ength + 1]
+        int[] prefixArray = new int[length + 1];
+
+        for (int i = 0; i < length; i++) {
+            prefixArray[i + 1] = prefixArray[i] + nums[i];
+        }
+
+
+        int minLength = Integer.MAX_VALUE;
+
+
         
-
-
-
-
-
         
-
         return 0;
     }
 
